@@ -1,0 +1,142 @@
+Given a matrix with n rows and m columns. Your task is to find the kth element which is obtained while traversing the matrix spirally. You need to complete the 
+method findK which takes four arguments the first argument is the matrix A and the next two arguments will be n and m denoting the size of the matrix A and then
+the forth argument is an integer k. The function will return the kth element obtained while traversing the matrix spirally.
+
+Example 1:
+
+Input:
+n = 4, m = 4, k = 10
+A[][] = {{1  2  3  4},
+         {5  6  7  8},
+         {9  10 11 12},
+         {13 14 15 16}}
+Output:
+13
+Explanation:
+
+The spiral order of matrix will look like 1->2->3->4->8->12->16->15->14->13->9->5->6->7->11->10. So the 10th element in this order is 13. 
+Example 2:
+
+Input:
+n = 3, m = 3, k = 4
+A[][] = {{1 2 3},
+         {4 5 6},
+         {7 8 9}}
+Output:
+6
+Explanation:
+The spiral order of matrix will look like 1->2->3->6->9->8->7->4->5. So the 4th element in this order is 6.
+Your Task:
+You only need to implement the given function findK(). Do not read input, instead use the arguments given in the function. Return the K'th element obtained by
+traversing matrix spirally.
+
+Expected Time Complexity: O(n*m)
+Expected Auxiliary Space: O(n*m)
+
+Constraints:
+1<=n,m<=103
+1<=k<=n*m
+
+
+
+
+
+
+
+
+
+
+
+
+
+*************************************************************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//{ Driver Code Starts
+import java.util.*;
+
+class Find_Given_Element_Of_Spiral_Matrix 
+{
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		int t = sc.nextInt();
+		while(t > 0)
+		{
+			int n = sc.nextInt();
+			int m = sc.nextInt();
+			int k = sc.nextInt();
+			int arr[][] = new int[1000][1000];
+			for(int i=0; i<n; i++)
+			{
+				for(int j=0; j<m; j++ )
+				{
+					arr[i][j] = sc.nextInt();
+				}
+			}
+			System.out.println(new Solution().findK(arr, n, m, k));
+		t--;
+		}
+	}
+}
+// } Driver Code Ends
+
+
+class Solution
+{
+    /*You are required to complete this method*/
+    int findK(int A[][], int n, int m, int k)
+    {
+	    // Your code here	
+	    int total = m*n;
+	    int rowS = 0;
+	    int colS = 0;
+	    int rowE = n-1;
+	    int colE = m-1;
+	    if(total==0)return 0;
+	    while(colS<=colE && rowS<=rowE){
+	        for(int i = colS;i<=colE;i++){
+	            k--;
+	            if(k==0){
+	                return A[rowS][i];
+	            }
+	        }
+	        rowS++;
+	        
+	        for(int j= rowS;j<=rowE;j++){
+	            k--;
+	            if(k==0){
+	                return A[j][colE];
+	            }
+	        }
+	        colE--;
+	        
+	        for(int i=colE;i>=colS;i--){
+	            k--;
+	            if(k==0)return A[rowE][i];
+	        }
+	        rowE--;
+	        
+	        for(int j = rowE;j>=rowS;j--){
+	            k--;
+	            if(k==0)return A[j][colS];
+	        }
+	        colS++;
+	    }
+	    return 0;
+    }
+}
