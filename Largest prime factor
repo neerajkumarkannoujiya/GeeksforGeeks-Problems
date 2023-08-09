@@ -1,0 +1,135 @@
+Given a number N, the task is to find the largest prime factor of that number.
+ Example 1:
+
+Input:
+N = 5
+Output:
+5
+Explanation:
+5 has 1 prime factor i.e 5 only.
+Example 2:
+
+Input:
+N = 24
+Output:
+3
+Explanation:
+24 has 2 prime factors 2 and 3 in which 3 is greater.
+Your Task:
+You don't need to read input or print anything. Your task is to complete the function largestPrimeFactor() which takes an integer N as input parameters and returns
+an integer, largest prime factor of N.
+
+Expected Time Complexity: O(sqrt(N))
+Expected Space Complexity: O(1)
+
+Constraints:
+2 <= N <= 109
+
+
+
+
+
+
+
+
+
+
+
+*************************************************************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//{ Driver Code Starts
+//Initial Template for Java
+
+
+import java.io.*;
+import java.util.*;
+
+class GFG
+{
+    public static void main(String args[])throws IOException
+    {
+        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(read.readLine());
+        while(t-- > 0)
+        {
+            int N = Integer.parseInt(read.readLine());
+            Solution ob = new Solution();
+            System.out.println(ob.largestPrimeFactor(N));
+        }
+    }
+}
+// } Driver Code Ends
+
+
+//User function Template for Java
+
+class Solution{
+    static long largestPrimeFactor(int N) {
+        int ans = Integer.MIN_VALUE;
+        int sqrt = (int)Math.sqrt(N);
+        for(int i = 2;i <= sqrt;i++)
+        {
+            while(N % i == 0)
+            {
+                ans = Integer.max(ans,i);
+                N = N / i;
+            }
+        }
+        ans = Math.max(ans,N);
+        return ans;
+        
+    }
+}
+
+
+/*
+
+**********************    Another  Aproach    ********************************
+
+
+class Solution{
+    public static boolean isPrime(int n){
+        int count = 0;
+        for(int i =2;i<n;i++){
+            if(n%i==0){
+                return false;
+            }
+            
+        }
+        return true;
+        
+    }
+    static long largestPrimeFactor(int N) {
+        // code here
+        if(isPrime(N)){
+            return N;
+        }
+        int i = (int)Math.ceil(Math.sqrt(N));
+        for(;i>1;i--){
+            if(N%i==0 && isPrime(i)){
+                return i;
+            }
+        }
+        
+        return 1;
+        
+    }
+}
+
+*/
+
